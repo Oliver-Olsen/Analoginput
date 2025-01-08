@@ -40,6 +40,11 @@ void loop() {
   //Serial.println(analogRead(ANALOGPIN));
   
   potValue = analogRead(ANALOGPIN);
+
+  // If the value exeeds the limit it is cought and set to max.
+  if (potValue > 255){
+    potValue = 255;
+  }
   // voltage variable
   voltage = potValue * (3.3/675);
   // Forces 3 decimals on the float value of our voltage
