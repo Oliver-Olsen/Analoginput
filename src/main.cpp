@@ -1,18 +1,35 @@
-#include <Arduino.h>
+//Oliver Olsen s205443
+//Nils Wulff   s223968
 
-// put function declarations here:
-int myFunction(int, int);
+/*
+*   8a. The analog value is represented as an int.
+*   The highest value when using the 3v3, is 675 (theoretically)
+*   
+*   8b. The highest value we could read is 3.34
+*   
+*   8c. It resonates slightly with 0.03 in variation.
+*   
+*   
+*/
+
+#include <Arduino.h>
+#define ANALOGPIN A0
+
+float voltage = 0.000;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(9600);
+  pinMode(ANALOGPIN, INPUT);
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+  //Serial.println(analogRead(ANALOGPIN));
+  
+  // voltage variable
+  voltage = analogRead(ANALOGPIN) * (3.3/675);
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  // Forces 3 decimals on the float value of our voltage
+  Serial.println(voltage, 3);
+  delay(300);
 }
