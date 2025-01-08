@@ -2,6 +2,7 @@
 //Nils Wulff   s223968
 
 /*
+*   We're using an arduino Mega2560.
 *   8a. The analog value is represented as an int.
 *   The highest value when using the 3v3, is 675 (theoretically)
 *   
@@ -41,16 +42,17 @@ void loop() {
   
   potValue = analogRead(ANALOGPIN);
 
-  // If the value exeeds the limit it is cought and set to max.
-  if (potValue > 255){
-    potValue = 255;
-  }
+  
   // voltage variable
   voltage = potValue * (3.3/675);
   // Forces 3 decimals on the float value of our voltage
   Serial.println(voltage, 3);
 
   blueVal = map(potValue, 0, 675, 0, 255);
+  // If the value exeeds the limit it is cought and set to max.
+  if (blueVal > 255){
+    blueVal = 255;
+  }
   analogWrite(BLUEPIN, blueVal);
 
   delay(100);
